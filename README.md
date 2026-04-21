@@ -24,15 +24,15 @@
 
 ```bash
 git clone https://github.com/SoulSkrill/TestovoeDjangoOplata.git
-cd <TestovoeDjangoOplata>
+cd ~/TestovoeDjangoOplata
 cp .env.example .env
 ```
 
 Заполнить `.env`.
 
-#### Windows (PowerShell)
+#### Windows 
 
-```powershell
+```
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -43,7 +43,7 @@ python manage.py runserver
 
 #### Linux/macOS
 
-```bash
+```
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
