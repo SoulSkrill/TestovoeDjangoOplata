@@ -1,0 +1,4 @@
+﻿Django==6.0.4
+stripe==15.0.1
+gunicorn==23.0.0
+whitenoise==6.11.0

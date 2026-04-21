@@ -1,0 +1,63 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buy {{ item.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.4;
+        }
+        .card {
+            max-width: 560px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        button {
+            cursor: pointer;
+            background: #111;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p><strong>{{ item.price }} {{ item.currency|upper }}</strong></p>
+    <button id="buy-button">Buy</button>
+    <p id="status"></p>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe("{{ publishable_key }}");
+    const buyButton = document.getElementById("buy-button");
+    const statusNode = document.getElementById("status");
+
+    buyButton.addEventListener("click", async function () {
+        statusNode.textContent = "Создаю платежную сессию...";
+        const response = await fetch("/buy/{{ item.id }}/", { method: "GET" });
+
+        if (!response.ok) {
+            statusNode.textContent = "Не удалось создать сессию оплаты";
+            return;
+        }
+
+        const session = await response.json();
+        const result = await stripe.redirectToCheckout({ sessionId: session.id });
+
+        if (result.error) {
+            statusNode.textContent = result.error.message;
+        }
+    });
+</script>
+</body>
+</html>
