@@ -24,7 +24,7 @@
 
 ```bash
 git clone https://github.com/SoulSkrill/TestovoeDjangoOplata.git
-cd ~/TestovoeDjangoOplata
+cd TestovoeDjangoOplata
 cp .env.example .env
 ```
 
