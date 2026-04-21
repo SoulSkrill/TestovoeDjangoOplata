@@ -1,0 +1,73 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django Stripe Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.5;
+            background: #f6f8fb;
+        }
+        .card {
+            max-width: 820px;
+            background: #fff;
+            border: 1px solid #dce3eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #155cc5;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .box {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 8px;
+            background: #f2f6fc;
+            border: 1px solid #d7e2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Stripe Test Service</h1>
+    <p>Сервис работает. Ниже быстрые ссылки для проверки тестового задания.</p>
+
+    <div class="box">
+        <strong>Основные URL:</strong>
+        <ul>
+            <li><a href="/admin/">/admin/</a></li>
+            {% if sample_item %}
+                <li><a href="/item/{{ sample_item.id }}/">/item/{{ sample_item.id }}/</a> (пример Item)</li>
+                <li><a href="/buy/{{ sample_item.id }}/">/buy/{{ sample_item.id }}/</a> (JSON session id)</li>
+                <li><a href="/buy-intent/{{ sample_item.id }}/">/buy-intent/{{ sample_item.id }}/</a> (PaymentIntent)</li>
+            {% else %}
+                <li>Создайте Item в админке, чтобы появились ссылки /item и /buy.</li>
+            {% endif %}
+            {% if sample_order %}
+                <li><a href="/order/{{ sample_order.id }}/">/order/{{ sample_order.id }}/</a> (пример Order)</li>
+                <li><a href="/buy-order/{{ sample_order.id }}/">/buy-order/{{ sample_order.id }}/</a> (JSON order session)</li>
+            {% else %}
+                <li>Создайте Order в админке, чтобы появились ссылки /order и /buy-order.</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+</body>
+</html>

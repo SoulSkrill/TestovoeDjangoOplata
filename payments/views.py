@@ -8,6 +8,20 @@ from .models import Item, Order
 from .stripe_utils import get_stripe_keys
 
 
+@require_GET
+def home_page(request):
+    sample_item = Item.objects.order_by("id").first()
+    sample_order = Order.objects.order_by("id").first()
+    return render(
+        request,
+        "payments/home.html",
+        {
+            "sample_item": sample_item,
+            "sample_order": sample_order,
+        },
+    )
+
+
 def _build_item_line(item: Item, tax_rate_id: str | None = None) -> dict:
     line = {
         "price_data": {
